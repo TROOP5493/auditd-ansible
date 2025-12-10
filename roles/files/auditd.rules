@@ -1,0 +1,2 @@
+-w /etc/passwd -p wa -k passwd_changes
+-w /var/log/ -p wa -k log_changes
