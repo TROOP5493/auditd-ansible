@@ -1,0 +1,6 @@
+---
+- name: Configure auditd
+  hosts: localhost
+  become: yes
+  roles:
+    - auditd
