@@ -6,7 +6,40 @@ Repository Structure- The main playbook, an auditd role, config templates
 
 How to use- Run ansible-pull with your GitHUub repo URL to auto configure auditd on the VM
 
-Audit Rules- 
+Audit Rules- Monitor changes to /etc/passwd and entire /var/log/ directory.
+
+                +-----------------------+
+                |       GitHub Repo     |
+                |  (Playbook & Rules)   |
+                +-----------+-----------+
+                            |
+                            |  ansible-pull (HTTPS)
+                            v
+                +-----------------------+
+                |     Ubuntu 24.x VM    |
+                |  Runs ansible-pull to |
+                |  install/configure    |
+                |        auditd          |
+                +-----------+-----------+
+                            |
+                            |  Applies audit rules:
+                            |  - /etc/passwd changes
+                            |  - /var/log/ changes
+                            v
+                +-----------------------+
+                |        auditd         |
+                |  Logs system events   |
+                +-----------+-----------+
+                            |
+                            |  Log queries (ausearch, aureport)
+                            v
+                +-----------------------+
+                |   Administrator User  |
+                |  Verifies audit logs  |
+                +-----------------------+
+Verification Steps- Verify auditd by checking loaded rules and searching logs withj auditctl and ausearch
+
+Troubleshooting tips- Common issues are bad syntax, network errors, or missing dependencies.
 
 
 
